@@ -14,6 +14,10 @@
       "source": ["frontend/out"],
       "type": "assets"
     },
+    "nft_canister": {
+      "main": "backend/nft_canister.mo",
+      "type": "motoko"
+    },
     "llm": {
       "candid": "https://github.com/dfinity/llm/releases/latest/download/llm-canister-ollama.did",
       "type": "custom",

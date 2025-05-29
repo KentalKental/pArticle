@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST="{\"../../../../../node_modules/@dfinity/agent/lib/esm/agent/http/index.js -> ../../canisterStatus\":{\"id\":\"../../../../../node_modules/@dfinity/agent/lib/esm/agent/http/index.js -> ../../canisterStatus\",\"files\":[]},\"article-nft-app.jsx -> @dfinity/auth-client\":{\"id\":\"article-nft-app.jsx -> @dfinity/auth-client\",\"files\":[]}}"
