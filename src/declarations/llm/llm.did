@@ -1,0 +1,101 @@
+// ---- v0_chat types ----
+
+type chat_request_v0 = record {
+  // Valid values: "llama3.1:8b"
+  model: text;
+  messages: vec chat_message_v0;
+};
+
+type chat_message_v0 = record {
+  role: variant {
+    assistant;
+    system;
+    user;
+  };
+  content: text;
+};
+
+// ---- v1_chat types ----
+
+type chat_request_v1 = record {
+  // Valid values: "llama3.1:8b"
+  model: text;
+  messages: vec chat_message_v1;
+  tools: opt vec tool;
+};
+
+type chat_message_v1 = variant {
+  user: record {
+    content: text;
+  };
+  system: record {
+    content: text;
+  };
+  assistant: assistant_message;
+  tool: record {
+    content: text;
+    tool_call_id: text;
+  }
+};
+
+type tool_call_argument = record {
+  name: text;
+  value: text;
+};
+
+type assistant_message = record {
+  content: opt text;
+  tool_calls: vec record {
+    id: text;
+    function: record {
+      name: text;
+      arguments: vec tool_call_argument;
+    }
+  }
+};
+
+type chat_response_v1 = record {
+  message: assistant_message;
+};
+
+type parameter = record {
+  "type": text;
+  properties: opt vec property;
+  required: opt vec text;
+};
+
+type property = record {
+  "type": text;
+  description: opt text;
+  "enum": opt vec text;
+};
+
+type tool = variant {
+  function: record {
+    name: text;
+    description: opt text;
+    parameters: opt vec parameter;
+  };
+};
+
+type config = record {
+  workers_whitelist: variant {
+    all;
+    some: vec principal;
+  };
+  api_disabled: bool;
+};
+
+type backend_config = variant { 
+  groq : record { api_key : text }; 
+  worker; 
+  ollama 
+};
+
+service llm: ( opt backend_config, opt config) -> {
+  // Request a chat completion.
+  v1_chat: (chat_request_v1) -> (chat_response_v1);
+
+  // Initial chat API (deprecated)
+  v0_chat: (chat_request_v0) -> (text);
+}

@@ -1,0 +1,14 @@
+type Role = 
+ variant {
+   system;
+   user;
+ };
+type ChatMessage = 
+ record {
+   content: text;
+   role: Role;
+ };
+service : {
+  chat: (vec ChatMessage) -> (text);
+  prompt: (text) -> (text);
+}

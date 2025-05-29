@@ -1,0 +1,17 @@
+{
+  "name": "llm-chatbot",
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "prebuild": "npm run prebuild --workspaces --if-present",
+    "dev": "npm run dev --workspaces --if-present"
+  },
+  "type": "module",
+  "workspaces": [
+    "frontend"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.8"
+  }
+}
